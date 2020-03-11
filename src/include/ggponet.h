@@ -147,12 +147,12 @@ typedef enum {
 /*
  * 列挙GGPOEventCodeは発行したイベントの種類を記述する。
  * 
- * GGPO_EVENTCODE_CONNECTED_TO_PEER - ネットワークの向こう側に動いているゲームとハンドシェイクが完成した。
+ * GGPO_EVENTCODE_CONNECTED_TO_PEER - ネットワークの向こう側に動いているゲームとハンドシェイクが完了した。
  * 
  * GGPO_EVENTCODE_SYNCHRONIZING_WITH_PEER - ネットワークの向こう側のクライアントと同期化中。
  * u.synchronizingの構造にある「count」及び「total」というメンバーは進行を指示する。
  * 
- * GGPO_EVENTCODE_SYNCHRONIZED_WITH_PEER - ピアとの同期化が完成済みを指示する。
+ * GGPO_EVENTCODE_SYNCHRONIZED_WITH_PEER - ピアとの同期化が完了済みを指示する。
  * 
  * GGPO_EVENTCODE_RUNNING - クライアントは全部同期化された。ggpo_synchronize_inputsを用いて入力の送信を開始可能。
  * 
@@ -176,6 +176,11 @@ typedef enum {
  * The GGPOEvent structure contains an asynchronous event notification sent
  * by the on_event callback.  See GGPOEventCode, above, for a detailed
  * explanation of each event.
+ */
+
+/*
+ * 構造GGPOEventはon_eventというコールバックによって送信した非同期のイベント通知を含めます。
+ * イベントごとの解説は上記にGGPOEventCodeを参照してください。
  */
 typedef struct {
    GGPOEventCode code;
