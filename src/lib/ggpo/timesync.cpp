@@ -14,7 +14,7 @@ TimeSync::TimeSync()
    _next_prediction = FRAME_WINDOW_SIZE * 3;
 }
 
-TimeSync::~TimeSync()
+TimeSync::â€¾TimeSync()
 {
 }
 
@@ -22,7 +22,7 @@ void
 TimeSync::advance_frame(GameInput &input, int advantage, int radvantage)
 {
    // Remember the last frame and frame advantage
-   // ‘O‚ÌƒtƒŒ[ƒ€‚¨‚æ‚ÑƒtƒŒ[ƒ€·‚ğŠo‚¦‚é
+   // å‰ã®ãƒ•ãƒ¬ãƒ¼ãƒ ãŠã‚ˆã³ãƒ•ãƒ¬ãƒ¼ãƒ å·®ã‚’è¦šãˆã‚‹
    _last_inputs[input.frame % ARRAY_SIZE(_last_inputs)] = input;
    _local[input.frame % ARRAY_SIZE(_local)] = advantage;
    _remote[input.frame % ARRAY_SIZE(_remote)] = radvantage;
@@ -32,7 +32,7 @@ int
 TimeSync::recommend_frame_wait_duration(bool require_idle_input)
 {
    // Average our local and remote frame advantages
-   // ƒŒƒ‚[ƒg‚¨‚æ‚Ñƒ[ƒJƒ‹‚ÌƒtƒŒ[ƒ€·‚ğ•½‹Ï‚·‚é 
+   // ãƒ¬ãƒ¢ãƒ¼ãƒˆãŠã‚ˆã³ãƒ­ãƒ¼ã‚«ãƒ«ã®ãƒ•ãƒ¬ãƒ¼ãƒ å·®ã‚’å¹³å‡ã™ã‚‹ 
    int i, sum = 0;
    float advantage, radvantage;
    for (i = 0; i < ARRAY_SIZE(_local); i++) {
@@ -53,8 +53,8 @@ TimeSync::recommend_frame_wait_duration(bool require_idle_input)
    // needs to slow down so the other user can catch up.
    // Only do this if both clients agree on who's ahead!!
    // 
-   // ’N‚©‚ªs“®‚·‚ê‚Î‚¢‚¢‚©”»’f‚·‚éBæs‚µ‚Ä‚¢‚é•û‚ÍŒã‘±‚Ì•û‚ª’Ç‚¢‚Â‚¯‚é‚æ‚¤‚É’x‚ç‚³‚È‚¯‚ê‚Î‚È‚ç‚È‚¢B
-   // ’N‚ªæs‚µ‚Ä‚¢‚éƒ†[ƒU[‚Å‚ ‚é‚©—¼•û‚Ì”F‚ß‡‚¤ê‡‚É‚¾‚¯s“®‚·‚é
+   // èª°ã‹ãŒè¡Œå‹•ã™ã‚Œã°ã„ã„ã‹åˆ¤æ–­ã™ã‚‹ã€‚å…ˆè¡Œã—ã¦ã„ã‚‹æ–¹ã¯å¾Œç¶šã®æ–¹ãŒè¿½ã„ã¤ã‘ã‚‹ã‚ˆã†ã«é…ã‚‰ã•ãªã‘ã‚Œã°ãªã‚‰ãªã„ã€‚
+   // èª°ãŒå…ˆè¡Œã—ã¦ã„ã‚‹ãƒ¦ãƒ¼ã‚¶ãƒ¼ã§ã‚ã‚‹ã‹ä¸¡æ–¹ã®èªã‚åˆã†å ´åˆã«ã ã‘è¡Œå‹•ã™ã‚‹
    if (advantage >= radvantage) {
       return 0;
    }
@@ -63,15 +63,15 @@ TimeSync::recommend_frame_wait_duration(bool require_idle_input)
    // the difference between the two to figure out how long to
    // sleep for.
    // 
-   // ƒNƒ‰ƒCƒGƒ“ƒg‚Ì—¼•û‚ª”F‚ß‡‚¤‚Ì‚ÅƒXƒŠ[ƒv‚ÌŠúŠÔ‚ğŒˆ‚ß‚é‚æ‚¤‚É’†“_‚ğŒvZ‚·‚é
+   // ã‚¯ãƒ©ã‚¤ã‚¨ãƒ³ãƒˆã®ä¸¡æ–¹ãŒèªã‚åˆã†ã®ã§ã‚¹ãƒªãƒ¼ãƒ—ã®æœŸé–“ã‚’æ±ºã‚ã‚‹ã‚ˆã†ã«ä¸­ç‚¹ã‚’è¨ˆç®—ã™ã‚‹
    int sleep_frames = (int)(((radvantage - advantage) / 2) + 0.5);
 
-   Log("iteration %d:  sleep frames is %d\n", count, sleep_frames);
+   Log("iteration %d:  sleep frames is %dÂ¥n", count, sleep_frames);
 
    // Some things just aren't worth correcting for.  Make sure
    // the difference is relevant before proceeding.
    // 
-   // ·‚ª’á‚·‚¬‚é‚È‚çis‚µ‚È‚¢
+   // å·®ãŒä½ã™ãã‚‹ãªã‚‰é€²è¡Œã—ãªã„
    if (sleep_frames < MIN_FRAME_ADVANTAGE) {
       return 0;
    }
@@ -81,12 +81,12 @@ TimeSync::recommend_frame_wait_duration(bool require_idle_input)
    // user's input isn't sweeping in arcs (e.g. fireball motions in
    // Street Fighter), which could cause the player to miss moves.
    // 
-   // ’ˆÓF‰º‹L‚ªÀs‚³‚ê‚È‚¢‚Ì‚Å–³‹‚µ‚Ä‚à–â‘è‚È‚¢‚ñ‚Å‚·B
-   // “ü—Í‚ª•ÏX‚µ‚È‚¢ê‡‚ÉƒXƒŠ[ƒv‚µ‚È‚¢
+   // æ³¨æ„ï¼šä¸‹è¨˜ãŒå®Ÿè¡Œã•ã‚Œãªã„ã®ã§ç„¡è¦–ã—ã¦ã‚‚å•é¡Œãªã„ã‚“ã§ã™ã€‚
+   // å…¥åŠ›ãŒå¤‰æ›´ã—ãªã„å ´åˆã«ã‚¹ãƒªãƒ¼ãƒ—ã—ãªã„
    if (require_idle_input) {
       for (i = 1; i < ARRAY_SIZE(_last_inputs); i++) {
          if (!_last_inputs[i].equal(_last_inputs[0], true)) {
-            Log("iteration %d:  rejecting due to input stuff at position %d...!!!\n", count, i);
+            Log("iteration %d:  rejecting due to input stuff at position %d...!!!Â¥n", count, i);
             return 0;
          }
       }
@@ -94,6 +94,6 @@ TimeSync::recommend_frame_wait_duration(bool require_idle_input)
 
 
    // Success!!! Recommend the number of frames to sleep and adjust
-   // ¬Œ÷III•â³‚µƒXƒŠ[ƒv‚·‚éƒtƒ‹[ƒ€”‚ğŠ©‚ß‚é
+   // æˆåŠŸï¼ï¼ï¼è£œæ­£ã—ã‚¹ãƒªãƒ¼ãƒ—ã™ã‚‹ãƒ•ãƒ«ãƒ¼ãƒ æ•°ã‚’å‹§ã‚ã‚‹
    return MIN(sleep_frames, MAX_FRAME_ADVANTAGE);
 }
