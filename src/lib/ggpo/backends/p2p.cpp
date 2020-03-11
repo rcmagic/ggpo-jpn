@@ -1,4 +1,4 @@
-/* -----------------------------------------------------------------------
+﻿/* -----------------------------------------------------------------------
  * GGPO.net (http://ggpo.net)  -  Copyright 2009 GroundStorm Studios, LLC.
  *
  * Use of this software is governed by the MIT license that can be found
@@ -145,6 +145,7 @@ Peer2PeerBackend::DoPoll(int timeout)
          }
 
          // send timesync notifications if now is the proper time
+		 // タイム同期の報知を送信する
          if (current_frame > _next_recommended_sleep) {
             int interval = 0;
             for (int i = 0; i < _num_players; i++) {

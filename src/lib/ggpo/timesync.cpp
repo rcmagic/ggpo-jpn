@@ -63,7 +63,7 @@ TimeSync::recommend_frame_wait_duration(bool require_idle_input)
    // the difference between the two to figure out how long to
    // sleep for.
    // 
-   // クライエントの両方が認め合うのでスリープの期間を決めるように中点を計算する
+   // クライアントの両方が認め合うのでスリープの期間を決めるように中点を計算する
    int sleep_frames = (int)(((radvantage - advantage) / 2) + 0.5);
 
    Log("iteration %d:  sleep frames is %d¥n", count, sleep_frames);
@@ -94,6 +94,6 @@ TimeSync::recommend_frame_wait_duration(bool require_idle_input)
 
 
    // Success!!! Recommend the number of frames to sleep and adjust
-   // 成功！！！補正しスリープするフルーム数を勧める
+   // 成功！！！補正しスリープするフレーム数を勧める
    return MIN(sleep_frames, MAX_FRAME_ADVANTAGE);
 }

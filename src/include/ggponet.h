@@ -1,4 +1,4 @@
-/* -----------------------------------------------------------------------
+﻿/* -----------------------------------------------------------------------
  * GGPO.net (http://ggpo.net)  -  Copyright 2009 GroundStorm Studios, LLC.
  *
  * Use of this software is governed by the MIT license that can be found
@@ -142,6 +142,24 @@ typedef enum {
  * down to ensure fairness.  The u.timesync.frames_ahead parameter in
  * the GGPOEvent object indicates how many frames the client is.
  *
+ */
+
+/*
+ * 列挙GGPOEventCodeは発行したイベントの種類を記述する。
+ * 
+ * GGPO_EVENTCODE_CONNECTED_TO_PEER - ネットワークの向こう側に動いているゲームとハンドシェイクが完成した。
+ * 
+ * GGPO_EVENTCODE_SYNCHRONIZING_WITH_PEER - ネットワークの向こう側のクライアントと同期化中。
+ * u.synchronizingの構造にある「count」及び「total」というメンバーは進行を指示する。
+ * 
+ * GGPO_EVENTCODE_SYNCHRONIZED_WITH_PEER - ピアとの同期化が完成済みを指示する。
+ * 
+ * GGPO_EVENTCODE_RUNNING - クライアントは全部同期化された。ggpo_synchronize_inputsを用いて入力の送信を開始可能。
+ * 
+ * GGPO_EVENTCODE_DISCONNECTED_FROM_PEER - 向こう側のクライアントとの接続が切断された。
+ * 
+ * GGPO_EVENTCODE_TIMESYNC - タイム同期処理はローカルのクライアントの進行が先行すぎて
+ * 公正を旨とするように遅らせるべきだと判断した。
  */
 typedef enum {
    GGPO_EVENTCODE_CONNECTED_TO_PEER            = 1000,

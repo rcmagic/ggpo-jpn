@@ -1,4 +1,4 @@
-#include <windows.h>
+﻿#include <windows.h>
 #include <gl/gl.h>
 #include <gl/glu.h>
 #include <math.h>
@@ -60,6 +60,8 @@ vw_begin_game_callback(const char *)
  *
  * Notification from GGPO that something has happened.  Update the status
  * text at the bottom of the screen to notify the user.
+ * 
+ * GGPOから何か行った通報。ユーザーを通報しに画面の下に現状テキストを更新する。
  */
 bool __cdecl
 vw_on_event_callback(GGPOEvent *info)

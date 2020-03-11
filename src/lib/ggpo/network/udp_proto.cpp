@@ -1,4 +1,4 @@
-/* -----------------------------------------------------------------------
+﻿/* -----------------------------------------------------------------------
  * GGPO.net (http://ggpo.net)  -  Copyright 2009 GroundStorm Studios, LLC.
  *
  * Use of this software is governed by the MIT license that can be found
@@ -90,6 +90,8 @@ UdpProtocol::SendInput(GameInput &input)
       if (_current_state == Running) {
          /*
           * Check to see if this is a good time to adjust for the rift...
+          * 
+          * フレーム差による調整する時刻であるか決断する
           */
          _timesync.advance_frame(input, _local_frame_advantage, _remote_frame_advantage);
 
