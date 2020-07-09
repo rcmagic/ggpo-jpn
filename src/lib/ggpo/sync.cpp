@@ -21,7 +21,11 @@ Sync::~Sync()
 {
    /*
     * Delete frames manually here rather than in a destructor of the SavedFrame
-    * structure so we can efficently copy frames via weak references.
+    * structure so we can efficently copy frames via weak references.    
+    */
+   /*
+    * 弱い参照で効率的にフレームをコピーするようにSavedFrame構造のデストラクタにより
+    * ここで手動にフレームを削除する
     */
    for (int i = 0; i < ARRAY_SIZE(_savedstate.frames); i++) {
       _callbacks.free_buffer(_savedstate.frames[i].buf);
