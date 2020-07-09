@@ -178,12 +178,14 @@ void
 Sync::LoadFrame(int frame)
 {
    // find the frame in question
+   // 当フレームを見つける 
    if (frame == _framecount) {
       Log("Skipping NOP.\n");
       return;
    }
 
    // Move the head pointer back and load it up
+   // headのポインターを元に戻して読み込ませる
    _savedstate.head = FindSavedFrameIndex(frame);
    SavedFrame *state = _savedstate.frames + _savedstate.head;
 
